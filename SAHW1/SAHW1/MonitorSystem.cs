@@ -19,8 +19,8 @@ namespace SAHW1
         public MonitorSystem()
         { 
             //產生初始監視hosts
-            _hostCollection.Add(new Host("www.youtubehyrtd.com", ""));
-            _hostCollection.Add(new Host("www.google.com", ""));
+            addHost(new Host("www.youtubehyrtd.com", ""));
+            addHost(new Host("www.google.com", ""));
         }
 
         public void pingAll()
@@ -42,19 +42,43 @@ namespace SAHW1
                 {
                     host.setIp(hostIP.ToString());
                     host.setStatus(true);
+                    if (!isHostAlreadyInMonitoring(host))
+                        addHost(host);
                 }
                 else
+                {
                     host.setStatus(false);
+                    if (!isHostAlreadyInMonitoring(host))
+                        addHost(host);
+                }
             }
             catch
             {
                 host.setStatus(false);
+                if (!isHostAlreadyInMonitoring(host))
+                    addHost(host);
             }
         }
 
         public ArrayList currentHosts()
         {
             return _hostCollection;
+        }
+
+        public void addHost(Host host)
+        {
+            _hostCollection.Add(host);
+        }
+
+        public bool isHostAlreadyInMonitoring(Host host)
+        {
+            foreach(Host hostFromHostCollection in _hostCollection)
+            {
+                if (host.ip().Equals(hostFromHostCollection.ip()))
+                    if(host.name().Equals(hostFromHostCollection.name()))
+                        return true;
+            }
+            return false;
         }
     }
 }

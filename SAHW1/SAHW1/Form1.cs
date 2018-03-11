@@ -34,6 +34,11 @@ namespace SAHW1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            label1.Text = DateTime.Now.ToString();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
             refreshMonitorSystem();
         }
 
@@ -51,18 +56,20 @@ namespace SAHW1
                 rows.Add(new Object[] { host.name(), host.ip(), host.status() });
         }
 
-        #region 暫時別看
-
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonNewHost_Click(object sender, EventArgs e)
         {
-            //ping("www.yahoo6656575675675.com");
+            try
+            {
+                string hostName = textBoxNewHost.Text.ToString();
+                if (string.IsNullOrEmpty(hostName))
+                    throw new Exception();
+                else
+                    monitorSystem.ping(new Host(hostName, ""));
+            }
+            catch
+            {
+                MessageBox.Show("New Host欄位不可為空!");
+            }
         }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            label1.Text = DateTime.Now.ToString();
-        }
-
-        #endregion
     }
 }
