@@ -19,13 +19,12 @@ namespace SAHW1
     public partial class Form1 : Form
     {
         private DataGridViewRowCollection rows;
-        private ArrayList hostCollection;
+        private ArrayList hostCollection = new ArrayList();
 
         public Form1()
         {
             InitializeComponent();
             rows = dataGridView1.Rows;
-            hostCollection = new ArrayList();
             label1.Text = DateTime.Now.ToString();
         }
 
@@ -83,49 +82,15 @@ namespace SAHW1
             refreshDatas();
         }
 
-        private void refreshDatas()
-        {
-            rows.Clear();
-            pingAll(hostCollection);
-        }
-
         private void timer2_Tick(object sender, EventArgs e)
         {
             label1.Text = DateTime.Now.ToString();
         }
-    }
 
-    public class Host
-    {
-        private string _name;
-        private string _ip;
-        private bool _status;
-
-        public Host(string name, string ip, bool status)
+        private void refreshDatas()
         {
-            _name = name;
-            _ip = ip;
-            _status = status;
-        }
-
-        public static Host FailHost(string name, bool status)
-        {
-            return new Host(name, "", status);
-        }
-
-        public String name()
-        {
-            return _name;
-        }
-
-        public String ip()
-        {
-            return _ip;
-        }
-
-        public String status()
-        {
-            return _status ? "Up" : "Down";
+            rows.Clear();
+            pingAll(hostCollection);
         }
     }
 }
