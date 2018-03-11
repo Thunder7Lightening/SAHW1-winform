@@ -12,16 +12,11 @@ namespace SAHW1
         private string _ip;
         private bool _status;
 
-        public Host(string name, string ip, bool status)
+        public Host(string name = "", string ip = "", bool status = false)
         {
             _name = name;
             _ip = ip;
             _status = status;
-        }
-
-        public static Host FailHost(string name, bool status)
-        {
-            return new Host(name, "", status);
         }
 
         public String name()
@@ -34,9 +29,19 @@ namespace SAHW1
             return _ip;
         }
 
+        public void setIp(string ip)
+        {
+            _ip = ip;
+        }
+
         public String status()
         {
             return _status ? "Up" : "Down";
+        }
+
+        public void setStatus(bool status)
+        {
+            _status = status;
         }
     }
 }
