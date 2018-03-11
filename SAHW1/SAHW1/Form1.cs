@@ -62,13 +62,26 @@ namespace SAHW1
             {
                 string hostName = textBoxNewHost.Text.ToString();
                 if (string.IsNullOrEmpty(hostName))
-                    throw new Exception();
+                    throw new Exception("New Host欄位不可為空!");
                 else
                     monitorSystem.ping(new Host(hostName, ""));
             }
-            catch
+            catch(Exception exception)
             {
-                MessageBox.Show("New Host欄位不可為空!");
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = dataGridView1.CurrentCell.RowIndex;
+            if(rows[rowIndex].Cells[3].Selected)
+            {
+                string hostName = dataGridView1.SelectedCells[0].Value.ToString();
+                string hostIp = dataGridView1.SelectedCells[0].Value.ToString();
+                string hostStatus = dataGridView1.SelectedCells[0].Value.ToString();
+                monitorSystem.removeHost(new Host(hostName, hostIp, (hostStatus == "Up")));
+                dataGridView1.Rows.RemoveAt(rowIndex);
             }
         }
     }
