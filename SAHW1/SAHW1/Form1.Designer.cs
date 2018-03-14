@@ -52,11 +52,11 @@
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dataGridView1.Location = new System.Drawing.Point(94, 64);
+            this.dataGridView1.Location = new System.Drawing.Point(94, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(410, 301);
+            this.dataGridView1.Size = new System.Drawing.Size(596, 301);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -64,27 +64,31 @@
             // 
             this.Column1.HeaderText = "Host";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "IP address";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "Status";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             this.Column4.Text = "Delete";
             this.Column4.UseColumnTextForButtonValue = true;
             // 
             // buttonNewHost
             // 
-            this.buttonNewHost.Location = new System.Drawing.Point(530, 168);
+            this.buttonNewHost.Location = new System.Drawing.Point(532, 52);
             this.buttonNewHost.Name = "buttonNewHost";
             this.buttonNewHost.Size = new System.Drawing.Size(75, 23);
             this.buttonNewHost.TabIndex = 1;
@@ -101,7 +105,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("PMingLiU", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Font = new System.Drawing.Font("新細明體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label1.Location = new System.Drawing.Point(88, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(194, 35);
@@ -116,7 +120,7 @@
             // 
             // textBoxNewHost
             // 
-            this.textBoxNewHost.Location = new System.Drawing.Point(530, 140);
+            this.textBoxNewHost.Location = new System.Drawing.Point(532, 24);
             this.textBoxNewHost.Name = "textBoxNewHost";
             this.textBoxNewHost.Size = new System.Drawing.Size(100, 22);
             this.textBoxNewHost.TabIndex = 3;
@@ -124,7 +128,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(528, 125);
+            this.label2.Location = new System.Drawing.Point(530, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 4;
