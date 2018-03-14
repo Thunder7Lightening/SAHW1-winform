@@ -30,6 +30,8 @@ namespace SAHW1
         {
             rows = dataGridView1.Rows;
             label1.Text = DateTime.Now.ToString();
+
+            refreshDataGridView();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -51,9 +53,15 @@ namespace SAHW1
         private void refreshDataGridView()
         {
             rows.Clear();
+            int rowIndex = 0;
             ArrayList hostCollection = monitorSystem.currentHosts();
             foreach (Host host in hostCollection)
+            {
                 rows.Add(new Object[] { host.name(), host.ip(), host.status() });
+                Color statusColor = host.status() == "Up" ? Color.Green : Color.Red;
+                dataGridView1.Rows[rowIndex].Cells[2].Style.BackColor = statusColor;
+                rowIndex++;
+            }
         }
 
         private void buttonNewHost_Click(object sender, EventArgs e)
@@ -64,7 +72,13 @@ namespace SAHW1
                 if (string.IsNullOrEmpty(hostName))
                     throw new Exception("New Host欄位不可為空!");
                 else
-                    monitorSystem.ping(new Host(hostName, ""));
+                {
+                    bool addHostSuccess = monitorSystem.addHost(new Host(hostName));
+                    if (addHostSuccess)
+                        refreshDataGridView();
+                    else
+                        throw new Exception("Host已存在!");
+                }
             }
             catch(Exception exception)
             {
@@ -77,10 +91,8 @@ namespace SAHW1
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
             if(rows[rowIndex].Cells[3].Selected)
             {
-                string hostName = dataGridView1.SelectedCells[0].Value.ToString();
-                string hostIp = dataGridView1.SelectedCells[0].Value.ToString();
-                string hostStatus = dataGridView1.SelectedCells[0].Value.ToString();
-                monitorSystem.removeHost(new Host(hostName, hostIp, (hostStatus == "Up")));
+                string hostName = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                monitorSystem.removeHost(new Host(hostName));
                 dataGridView1.Rows.RemoveAt(rowIndex);
             }
         }

@@ -12,16 +12,21 @@ namespace SAHW1
         private string _ip;
         private bool _status;
 
-        public Host(string name = "", string ip = "", bool status = false)
+        public Host(string name = "")
         {
             _name = name;
-            _ip = ip;
-            _status = status;
+            _ip = "";
+            _status = false;
         }
 
         public String name()
         {
             return _name;
+        }
+
+        public void setName(String name)
+        {
+            _name = name;
         }
 
         public String ip()

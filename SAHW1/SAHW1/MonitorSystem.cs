@@ -45,23 +45,21 @@ namespace SAHW1
                 reply = p.Send(hostIP);
                 if (reply.Status == IPStatus.Success)
                 {
+                    //host.setName(Dns.GetHostEntry(hostIP).HostName);
                     host.setIp(hostIP.ToString());
                     host.setStatus(true);
-                    if (!isHostAlreadyInMonitoring(host))
-                        addHost(host);
+                    addHost(host);
                 }
                 else
                 {
                     host.setStatus(false);
-                    if (!isHostAlreadyInMonitoring(host))
-                        addHost(host);
+                    addHost(host);
                 }
             }
             catch
             {
                 host.setStatus(false);
-                if (!isHostAlreadyInMonitoring(host))
-                    addHost(host);
+                addHost(host);
             }
         }
 
@@ -70,9 +68,14 @@ namespace SAHW1
             return _hostCollection;
         }
 
-        public void addHost(Host host)
+        public bool addHost(Host host)
         {
-            _hostCollection.Add(host);
+            if (!isHostAlreadyInMonitoring(host))
+            {
+                _hostCollection.Add(host);
+                return true;
+            }
+            return false;
         }
 
         public void removeHost(Host host)
