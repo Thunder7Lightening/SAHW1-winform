@@ -10,7 +10,7 @@ using System.Net.Sockets;
 
 using System.Collections;
 
-namespace SAHW1
+namespace Model
 {
     class MonitorSystem
     {

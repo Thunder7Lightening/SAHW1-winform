@@ -14,6 +14,8 @@ using System.Net.Sockets;
 
 using System.Collections;
 
+using Model;
+
 namespace SAHW1
 {
     public partial class Form1 : Form
