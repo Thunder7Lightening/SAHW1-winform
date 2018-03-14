@@ -48,11 +48,19 @@ namespace SAHW1
             }
         }
 
+        private void setMonitorHostsStatusDown()
+        {
+            foreach (Host host in _hostCollection)
+                host.setStatus(false);
+        }
+
         public void pingAll()
         {
             if (isInternetConnected())
-                foreach(Host host in _hostCollection)
+                foreach (Host host in _hostCollection)
                     ping(host);
+            else
+                setMonitorHostsStatusDown();
         }
 
         private void ping(Host host)
