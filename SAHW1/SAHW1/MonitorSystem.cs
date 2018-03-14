@@ -28,13 +28,34 @@ namespace SAHW1
             addHost(new Host("www.facebook.com"));
         }
 
-        public void pingAll()
-        { 
-            foreach(Host host in _hostCollection)
-                ping(host);
+        private bool isInternetConnected()
+        {
+            Ping p = new Ping();
+            PingReply reply;
+
+            try
+            {
+                IPAddress hostIP = Dns.GetHostAddresses("www.google.com")[0];
+                reply = p.Send(hostIP);
+                if (reply.Status == IPStatus.Success)
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public void ping(Host host)
+        public void pingAll()
+        {
+            if (isInternetConnected())
+                foreach(Host host in _hostCollection)
+                    ping(host);
+        }
+
+        private void ping(Host host)
         {
             Ping p = new Ping();
             PingReply reply;
